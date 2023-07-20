@@ -1,26 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
-//next_permutation
+vector<int> a(9, 0);
 
-vector<int> h(9, 0);
-
-int main(){
-      
+int main() {
+    for(int i = 0; i <9; i++) cin >> a[i];
+    
     for(int i = 0; i < 9; i++){
-        cin >> h[i];
-    }
-
-    do{
-       int sum = 0;
-        for(int i = 0; i < 7; i++){
-            sum += h[i];
+        for(int j = 0; j < i; j++){
+            if(accumulate(a.begin(), a.end(), 0) - a[i] - a[j] == 100){
+                a.erase(a.begin() + i);
+                a.erase(a.begin() + j);
+            } 
         }
-        if(sum == 100) break;
-        
-    }while(next_permutation(h.begin(), h.end()));
-        
-    sort(h.begin(), h.begin() + 7);
-    for(int i = 0; i < 7; i++) cout << h[i] << '\n';
+    }
+    
+    sort(a.begin(), a.end());
+    for(int i : a) cout << i << '\n';
     
     return 0;
 }
