@@ -1,42 +1,40 @@
 #include <bits/stdc++.h>
 using namespace std;
-vector<int> a(9,0);
-int n = 9, r = 7;
-vector<vector<int>> ret(36, vector<int>(7,0));
-int sum;
 
-void print(vector<int> b){
-    sort(b.begin(), b.end());
-    for(int i : b) cout << i << '\n';    
+vector<int> h(9, 0);
+vector<int> ret(7, 0);
+void change(vector<int> &v){
+    for(int i = 0; i < 7; i++){
+        ret[i] = h[v[i]];
+    }
+    sort(ret.begin(), ret.end());
+    return;
 }
-
-void combi(int start, vector<int> &b){
-    if(b.size() == r){
-        ret.push_back(b);
+void combi(int start, vector<int> &v){
+    if(v.size() == 7){
+        change(v);
+        if(accumulate(ret.begin(), ret.end(), 0) == 100){
+            for(int a : ret) cout << a << '\n';
+            exit(0);
+        } 
         return;
     }
-    for(int i = start + 1; i < n; i++){
-        b.push_back(a[i]);
-        combi(i, b);
-        b.pop_back();
+    for(int i = start + 1; i < 9; i++){
+        v.push_back(i);
+        combi(start + 1, v);
+        v.pop_back();
     }
     return;
 }
 
+
 int main(){
-    for(int i = 0; i < 9; i++) cin >> a[i];
-    sort(a.begin(), a.end());
+    for(int i = 0; i < 9; i++){
+        cin >> h[i];        
+    }
     
     vector<int> v;
     combi(-1, v);
-    
-    for(vector<int> i : ret){
-        sum = accumulate(i.begin(),i.end(), 0);
-        if(sum == 100){
-            print(i);
-            return 0;
-        }
-    }
     
     return 0;
 }
