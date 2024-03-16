@@ -1,29 +1,27 @@
 #include <bits/stdc++.h>
 using namespace std;
-int N, M;
+int M, N;
 int A[1000004];
 int main(){
     ios::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     
-    cin >> N >> M;
-    for(int i = N; i <= M; i++){
+    cin >> M >> N;
+    for(int i = 2; i <= N; i++){
         A[i] = i;
     }
     
-    A[1] = 0;
-    
-    for(int i = 2; i <= sqrt(M); i++){
-        for(int j = N; j <= M; j++){
-            if(A[j] == 0) continue;
-            if(A[j] > i && A[j] % i == 0){
-                A[j] = 0;
-            }
+    for(int i = 2; i < N; i++){
+        if(A[i] == 0) continue;
+        for(int j = i + i; j <= N; j += i){
+            A[j] = 0;
         }
     }
     
-    for(int i = N; i <= M; i++){
+    for(int i = M; i <= N; i++){
         if(A[i]) cout << i << '\n';
     }
     
+    
+    return 0;
 }
