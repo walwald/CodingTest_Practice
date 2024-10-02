@@ -1,16 +1,14 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-
+int N;
 int main(){
-    int N;
     cin >> N;
-    
-    int zeros = 0;
+    int res = 0;
     for(int i = 5; i <= N; i *= 5){
-        zeros += N / i;
+        res += N/i;
     }
     
-    cout << zeros << '\n';
+    cout << res << '\n';
     
     return 0;
 }
